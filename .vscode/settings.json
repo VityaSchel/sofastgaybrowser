@@ -1,0 +1,17 @@
+{
+  "editor.tabCompletion": "on",
+  "path-intellisense.mappings": {
+    "/*": "${workspaceFolder}/*"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.associations": {
+    "tailwind.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifierEnding": "js"
+}

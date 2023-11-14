@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
 import '@/shared/styles/global.scss'
+import '@/shared/styles/tailwind.css'
+import ReactDOM from 'react-dom/client'
 import { Login } from '../pages/login.tsx'
 import { Home } from '../pages/home.tsx'
 
@@ -11,11 +12,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 )
 
 function App() {
-  const loggedIn = false
+  const loggedIn = true
+  const apiInstance = React.useMemo(() => {
+    new 
+  })
 
   return (
     loggedIn
-      ? <Login />
-      : <Home />
+      ? <Home />
+      : <Login />
   )
 }
