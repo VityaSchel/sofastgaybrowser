@@ -28,3 +28,9 @@ Please choose an option:
   
   Download it from [releases page](https://github.com/VityaSchel/sofastgaybrowser/releases) and run it. Only version for macOS is supported. Please use Tauri instructions to build versions for other OSes.
 </details>
+
+## Developing
+
+Install everything for Tauri (including Rust, Node.js, etc.) and run `npm run tauri dev` to start the app.
+
+Make sure to run `pkg package.json --output src-tauri/binaries/app` first to compile the binary for node.js first time.
