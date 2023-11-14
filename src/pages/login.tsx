@@ -1,6 +1,19 @@
+import { trpc } from '@/shared/trpc'
+
 export function Login() {
+  const { mutate } = trpc.useMutation(['greet'])
+
+  const greet = () => {
+    mutate({ name: 'vityaschel' }, {
+      onSuccess: (message) => {
+        alert(message)
+      }
+    })
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.stopPropagation()
+    greet()
   }
 
   return (
