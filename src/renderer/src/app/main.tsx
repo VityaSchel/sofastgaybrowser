@@ -1,4 +1,6 @@
 import React from 'react'
+import '@/shared/styles/tailwind.css'
+import '@/shared/styles/globals.scss'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthContext } from '@/shared/context/auth'
@@ -18,7 +20,7 @@ export function App() {
   const [token, setToken] = React.useState('')
 
   React.useEffect(() => {
-    const token = window.api.test
+    const token = window.api.getAuthState()
     console.log(token)
   }, [])
 

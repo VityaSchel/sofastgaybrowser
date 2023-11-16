@@ -4,7 +4,7 @@
     "build/",
     "resources/"
   ],
-  // "ext": "js,jsx,ts,tsx,json.html,css,scss,icns,ico,png,plist,svg,ttf,woff,woff2,eot",
+  "ext": "*",
   "ignore": [
     "src/renderer/",
     "*.d.ts"
