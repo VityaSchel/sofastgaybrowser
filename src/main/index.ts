@@ -1,7 +1,12 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+const __dirname = dirname(fileURLToPath(import.meta.url)) + '/'
+
+import { GetAuthState } from './ipc-router'
 
 function createWindow(): void {
   // Create the browser window.
@@ -13,7 +18,9 @@ function createWindow(): void {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: true,
+      nodeIntegration: false,
+      contextIsolation: true
     }
   })
 
@@ -48,6 +55,8 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
+  ipcMain.handle('get_auth_state', () => GetAuthState())
 
   createWindow()
 

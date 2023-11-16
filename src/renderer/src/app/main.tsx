@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { store } from '@/shared/store'
 import { AuthContext } from '@/shared/context/auth'
 
 import { Login } from '@/pages/login'
@@ -10,6 +9,7 @@ import { Home } from '@/pages/home'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
+    {/* test */}
   </React.StrictMode>
 )
 
@@ -18,11 +18,8 @@ export function App() {
   const [token, setToken] = React.useState('')
 
   React.useEffect(() => {
-    store.get('token')
-      .then(token => {
-        setToken(token as string)
-        setIsLoggedIn(Boolean(token))
-      })
+    const token = window.api.test
+    console.log(token)
   }, [])
 
   const handleSubmitLogin = (token: string) => {

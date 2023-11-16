@@ -1,5 +1,5 @@
 import React from 'react'
-import { store } from '@/shared/store'
+import { store } from '@/shared/store/persistant'
 
 export function Login({ onSubmit }: {
   onSubmit: (token: string) => void
@@ -9,8 +9,7 @@ export function Login({ onSubmit }: {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     e.stopPropagation()
-    await store.set('token', token)
-    await store.save()
+    // store.set('token', token)
     onSubmit(token)
   }
 

@@ -1,0 +1,13 @@
+{
+  "watch": [
+    "src/",
+    "build/",
+    "resources/"
+  ],
+  // "ext": "js,jsx,ts,tsx,json.html,css,scss,icns,ico,png,plist,svg,ttf,woff,woff2,eot",
+  "ignore": [
+    "src/renderer/",
+    "*.d.ts"
+  ],
+  "exec": "npm run dev"
+}

@@ -11,7 +11,5 @@
   },
   "editor.quickSuggestions": {
     "strings": "on"
-  },
-  "javascript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.preferences.importModuleSpecifierEnding": "js"
+  }
 }

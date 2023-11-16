@@ -12,6 +12,7 @@
     "typecheck": "npm run typecheck:node && npm run typecheck:web",
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
+    "watch": "nodemon",
     "build": "npm run typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
@@ -20,7 +21,9 @@
   },
   "dependencies": {
     "@electron-toolkit/preload": "^2.0.0",
-    "@electron-toolkit/utils": "^2.0.0"
+    "@electron-toolkit/utils": "^2.0.0",
+    "electron-store": "^8.1.0",
+    "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-ts": "^1.0.0",
@@ -34,6 +37,7 @@
     "electron-vite": "^1.0.27",
     "eslint": "^8.47.0",
     "eslint-plugin-react": "^7.33.2",
+    "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.1.6",
