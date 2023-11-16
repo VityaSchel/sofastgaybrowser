@@ -12,7 +12,7 @@ const server = fastify({
 server.register(
   cors,
   {
-    origin: ['http://localhost:1420', 'tauri://localhost'],
+    origin: ['*'],
   }
 )
 

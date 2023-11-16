@@ -2,9 +2,9 @@
 
 There was a "so long gay bowser" so I present to you: a "so fast gay browser". 
 
-It's fast because it presents the content in a user-friendly form. Also it works on 🚀Rust🚀 (🚀🚀🚀) so it's very fast.
+It's fast because it presents the content in a user-friendly form.
 
-Compiled with Tauri (and it's my second project on Tauri that is a porn browser out of two of them. check out other one [here](https://github.com/VityaSchel/mypron))
+Made with Electron (and it's my second project with native apps is a porn browser out of two of them. check out other one built with Tauri [here](https://github.com/VityaSchel/mypron))
 
 ## Features
 
@@ -26,11 +26,17 @@ Please choose an option:
 <details>
   <summary>I'm legally allowed to watch adult videos in my region at my age and I won't use this software to infringe copyright</summary>
   
-  Download it from [releases page](https://github.com/VityaSchel/sofastgaybrowser/releases) and run it. Only version for macOS is supported. Please use Tauri instructions to build versions for other OSes.
+  Download it from [releases page](https://github.com/VityaSchel/sofastgaybrowser/releases) and run it. Only version for macOS is supported. Please use Electron instructions to build versions for other OSes.
 </details>
 
 ## Developing
 
-Install everything for Tauri (including Rust, Node.js, etc.) and run `npm run tauri dev` to start the app.
+Install everything for Electron (Node.js, Vite etc.) and run `npm run dev` to start the app.
 
-Make sure to run `pkg package.json --output src-tauri/binaries/app` first to compile the binary for node.js first time.
+## Why not Tauri?
+
+This project was initialized as a Tauri app, but later I moved it to Electron, because Tauri is just too hard to setup to use it with Node.js sidecar as a bundled binary. You are welcome to submit a PR with a working crossplatforming Tauri version of this app though!
+
+## License
+
+[MIT](./LICENSE.md) if you really care about porn-browsers licenses
