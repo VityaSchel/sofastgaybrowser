@@ -13,7 +13,7 @@ Made with Electron (and it's my second project with native apps is a porn browse
 - ask copyright holder if it's ok to make a copy of their copyrighted material (download to a computer via internet network using torrent protocol)
 - watch videos (only after copyright holder granted you permission)
 
-## Installation
+## Download
 
 Please choose an option:
 

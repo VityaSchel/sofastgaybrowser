@@ -1,13 +1,16 @@
 module.exports = {
   'env': {
-    'es2021': true,
+    'es2023': true,
     'node': true
   },
-  'extends': [
+  'parser': '@typescript-eslint/parser',
+  extends: [
     'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    '@electron-toolkit/eslint-config-ts/recommended',
     'plugin:@typescript-eslint/recommended'
   ],
-  'parser': '@typescript-eslint/parser',
   'parserOptions': {
     'ecmaVersion': 'latest',
     'sourceType': 'module'
@@ -33,6 +36,7 @@ module.exports = {
       'error',
       'never'
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off'
   }
 }

@@ -1,7 +1,7 @@
 {
   "editor.tabCompletion": "on",
   "path-intellisense.mappings": {
-    "@/*": "${workspaceFolder}/src/*"
+    "@/*": "${workspaceFolder}/src/renderer/src/*"
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
