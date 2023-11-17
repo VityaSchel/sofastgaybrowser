@@ -1,13 +1,24 @@
+import type { PornolabAPI } from 'gayporn'
 import { store } from './store'
-import { CaptchaRequiredError, CredentialsIncorrectError, PornolabAPI } from 'gayporn'
 
-const api = new PornolabAPI({ 
-  proxy: {
-    host: '127.0.0.1',
-    port: 9150,
-    type: 5
-  } 
-})
+let Pornolab: typeof import('gayporn')
+import('gayporn')
+  .then(pornolabImports => { 
+    Pornolab = pornolabImports
+    getAPI()
+  })
+
+
+let api: PornolabAPI
+function getAPI() {
+  api = new Pornolab.PornolabAPI({
+    proxy: {
+      host: '127.0.0.1',
+      port: 9150,
+      type: 5
+    }
+  })
+}
 
 export function GetAuthState() {
   return store.get('token')
@@ -27,10 +38,10 @@ export async function Login(username: string, password: string, captchaSolution?
     const token = await api.login({ username, password, captcha })
     return { ok: true, token }
   } catch (e) {
-    if (e instanceof CaptchaRequiredError) {
+    if (e instanceof Pornolab.CaptchaRequiredError) {
       captchaInternals = e.captcha.internals
-      return { ok: true, captchaURL: e.captcha.url }
-    } else if (e instanceof CredentialsIncorrectError) {
+      return { ok: true, captcha: true, captchaURL: e.captcha.url }
+    } else if (e instanceof Pornolab.CredentialsIncorrectError) {
       return { ok: false, error: 'Некорректные данные для входа' }
     } else {
       throw e

@@ -10,18 +10,22 @@ export function Login({ onSubmit }: {
   const [captcha, setCaptcha] = React.useState('')
   const [token, setToken] = React.useState('')
   const [captchaURL, setCaptchaURL] = React.useState('')
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const handleSaveToken = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
     e.preventDefault()
     e.stopPropagation()
     await window.api.setToken(token)
     onSubmit(token)
+    setIsLoading(false)
   }
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
     e.preventDefault()
     e.stopPropagation()
-    const response = await window.api.login(username, password)
+    const response = await window.api.login(username, password, captchaURL ? captcha : undefined)
     if(response.ok) {
       if(response.captcha) {
         setCaptchaURL(response.captchaURL)
@@ -30,7 +34,10 @@ export function Login({ onSubmit }: {
       }
     } else {
       alert(response.error)
+      setCaptchaURL('')
+      setCaptcha('')
     }
+    setIsLoading(false)
   }
 
   return (
@@ -74,6 +81,7 @@ export function Login({ onSubmit }: {
                 className='p-2 w-full bg-neutral-800 text-white rounded'
                 value={username} 
                 onChange={e => setUsername(e.target.value)} 
+                disabled={isLoading}
               />
               <input 
                 type="password" 
@@ -81,6 +89,7 @@ export function Login({ onSubmit }: {
                 className='p-2 w-full bg-neutral-800 text-white rounded'
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
+                disabled={isLoading}
               />
               {captchaURL && (
                 <div className='flex items-center gap-3 w-full'>
@@ -91,10 +100,17 @@ export function Login({ onSubmit }: {
                     className='p-2 w-full bg-neutral-800 text-white rounded'
                     value={captcha} 
                     onChange={e => setCaptcha(e.target.value)} 
+                    disabled={isLoading}
                   />
                 </div>
               )}
-              <button type="submit" className='text-white bg-indigo-500 py-2 px-4 rounded-md font-semibold shadow-lg shadow-indigo-500/50'>Войти</button>
+              <button
+                type="submit"
+                className='text-white bg-indigo-500 py-2 px-4 rounded-md font-semibold shadow-lg shadow-indigo-500/50 disabled:shadow-none disabled:bg-indigo-500/50 disabled:cursor-not-allowed'
+                disabled={isLoading || !username || !password || (Boolean(captchaURL) && !captcha)}
+              >
+                Войти
+              </button>
             </form>  
           </div>
         </div>

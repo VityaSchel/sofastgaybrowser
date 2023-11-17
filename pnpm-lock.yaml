@@ -11,12 +11,15 @@ dependencies:
   '@electron-toolkit/utils':
     specifier: ^2.0.0
     version: 2.0.1(electron@25.9.5)
+  electron-nightly:
+    specifier: 29.0.0-nightly.20231115
+    version: 29.0.0-nightly.20231115
   electron-store:
     specifier: ^8.1.0
     version: 8.1.0
   gayporn:
-    specifier: ^1.1.0
-    version: 1.1.0
+    specifier: ^1.1.3
+    version: 1.1.3
   react-router-dom:
     specifier: ^6.19.0
     version: 6.19.0(react-dom@18.2.0)(react@18.2.0)
@@ -1890,6 +1893,19 @@ packages:
       - supports-color
     dev: true
 
+  /electron-nightly@29.0.0-nightly.20231115:
+    resolution: {integrity: sha512-fO+vaSpMW6QnV8vfkCFHbX3jZjJaJkDyBA8HBymmnBS5z4L/Wj18xoAqWUfUkOsW+1WkByhPcS+qsVO8diQBZQ==}
+    engines: {node: '>= 12.20.55'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@electron/get': 2.0.3
+      '@types/node': 18.18.9
+      extract-zip: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /electron-publish@24.5.0:
     resolution: {integrity: sha512-zwo70suH15L15B4ZWNDoEg27HIYoPsGJUF7xevLJLSI7JUPC8l2yLBdLGwqueJ5XkDL7ucYyRZzxJVR8ElV9BA==}
     dependencies:
@@ -2408,8 +2424,8 @@ packages:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
 
-  /gayporn@1.1.0:
-    resolution: {integrity: sha512-Ydr/XOsg0gHQ4AdM6jfDoeVW5VOg3CQsEtq4IIRDK9UqCTzP2yKgdDwJ7aN1aMWF3RAMVqZ1mKpykOV/e0MgiQ==}
+  /gayporn@1.1.3:
+    resolution: {integrity: sha512-6UnBSZRveM6xzc/+dyXrXp8f/dHBwLZfWEYvrt2FIod0V3LjH6yt+hf0FmsNxejPu3hzEqSBL2M+irBGotHjSw==}
     dependencies:
       jsdom: 22.1.0
       windows-1251: 3.0.4

@@ -22,8 +22,9 @@
   "dependencies": {
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^2.0.0",
+    "electron-nightly": "29.0.0-nightly.20231115",
     "electron-store": "^8.1.0",
-    "gayporn": "^1.1.0",
+    "gayporn": "^1.1.3",
     "react-router-dom": "^6.19.0",
     "react-use-size": "^3.0.2"
   },
