@@ -23,7 +23,9 @@
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^2.0.0",
     "electron-store": "^8.1.0",
-    "react-router-dom": "^6.19.0"
+    "gayporn": "^1.1.0",
+    "react-router-dom": "^6.19.0",
+    "react-use-size": "^3.0.2"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-ts": "^1.0.0",

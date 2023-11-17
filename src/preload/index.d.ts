@@ -1,4 +1,4 @@
-import { API } from './index'
+import { type API } from './index'
 
 declare global {
   interface Window {

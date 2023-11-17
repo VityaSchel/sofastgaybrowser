@@ -6,7 +6,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url)) + '/'
 
-import { GetAuthState } from './ipc-router'
+import { GetAuthState, Login, SetAuthToken } from './ipc-router'
 
 function createWindow(): void {
   // Create the browser window.
@@ -57,6 +57,8 @@ app.whenReady().then(() => {
   })
 
   ipcMain.handle('get_auth_state', () => GetAuthState())
+  ipcMain.handle('set_auth_token', (_, token: string) => SetAuthToken(token))
+  ipcMain.handle('login', (_, username: string, password: string, captcha?: string) => Login(username, password, captcha))
 
   createWindow()
 

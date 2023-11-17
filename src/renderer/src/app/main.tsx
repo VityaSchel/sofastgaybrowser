@@ -20,8 +20,15 @@ export function App() {
   const [token, setToken] = React.useState('')
 
   React.useEffect(() => {
-    const token = window.api.getAuthState()
-    console.log(token)
+    window.api.getAuthState()
+      .then(token => {
+        if(!token) {
+          setIsLoggedIn(false)
+        } else {
+          setToken(token)
+          setIsLoggedIn(true)
+        }
+      })
   }, [])
 
   const handleSubmitLogin = (token: string) => {
