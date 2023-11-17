@@ -6,7 +6,7 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url)) + '/'
 
-import { GetAuthState, Login, SetAuthToken } from './ipc-router'
+import { GetAuthState, GetForum, GetTopic, Login, SetAuthToken, SetBBData } from './ipc-router'
 
 function createWindow(): void {
   // Create the browser window.
@@ -59,6 +59,9 @@ app.whenReady().then(() => {
   ipcMain.handle('get_auth_state', () => GetAuthState())
   ipcMain.handle('set_auth_token', (_, token: string) => SetAuthToken(token))
   ipcMain.handle('login', (_, username: string, password: string, captcha?: string) => Login(username, password, captcha))
+  ipcMain.handle('get_forum', (_, forumID: number, page: number) => GetForum(forumID, page))
+  ipcMain.handle('get_topic', (_, topicID: number) => GetTopic(topicID))
+  ipcMain.handle('set_bb_data', (_, token: string) => SetBBData(token))
 
   createWindow()
 

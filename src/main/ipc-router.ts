@@ -1,5 +1,6 @@
 import type { PornolabAPI } from 'gayporn'
 import { store } from './store'
+import _ from 'lodash'
 
 let Pornolab: typeof import('gayporn')
 import('gayporn')
@@ -28,6 +29,10 @@ export function SetAuthToken(token: string) {
   return store.set('token', token)
 }
 
+export function SetBBData(token: string) {
+  api.setAuthToken({ bbData: token })
+}
+
 let captchaInternals: any
 export async function Login(username: string, password: string, captchaSolution?: string) {
   const captcha = captchaSolution ? {
@@ -36,6 +41,7 @@ export async function Login(username: string, password: string, captchaSolution?
   } : undefined
   try {
     const token = await api.login({ username, password, captcha })
+    store.set('token', token)
     return { ok: true, token }
   } catch (e) {
     if (e instanceof Pornolab.CaptchaRequiredError) {
@@ -47,4 +53,14 @@ export async function Login(username: string, password: string, captchaSolution?
       throw e
     }
   }
+}
+
+export async function GetForum(forumID: number, page = 0) {
+  const topics = await api.getForum(forumID, { offset: page * 50 })
+  return topics
+}
+
+export async function GetTopic(topicID: number) {
+  const topic = await api.getTopic(topicID)
+  return _.omit(topic, 'torrent.download')
 }

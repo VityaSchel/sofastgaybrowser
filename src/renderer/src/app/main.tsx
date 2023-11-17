@@ -7,11 +7,11 @@ import { AuthContext } from '@/shared/context/auth'
 
 import { Login } from '@/pages/login'
 import { Home } from '@/pages/home'
+import { ForumPage } from '@/pages/forums/[id]'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
-    {/* test */}
   </React.StrictMode>
 )
 
@@ -25,8 +25,11 @@ export function App() {
         if(!token) {
           setIsLoggedIn(false)
         } else {
-          setToken(token)
-          setIsLoggedIn(true)
+          window.api.setBBData(token)
+            .then(() => {
+              setIsLoggedIn(true)
+              setToken(token)
+            })
         }
       })
   }, [])
@@ -38,13 +41,14 @@ export function App() {
 
   return (
     <AuthContext.Provider value={{ token }}>
-      <div className='bg-neutral-900'>
+      <div className='bg-neutral-900 min-h-screen'>
         {isLoggedIn !== 'loading' && (
           isLoggedIn
             ? (
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path='/forums/:id' element={<ForumPage />} />
                 </Routes>
               </BrowserRouter>
             )
