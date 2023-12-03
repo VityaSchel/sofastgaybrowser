@@ -2,7 +2,7 @@
 
 There was a "so long gay bowser" so I present to you: a "so fast gay browser". 
 
-[]
+![image](https://github.com/VityaSchel/sofastgaybrowser/assets/59040542/a867c7eb-0c5f-4b19-8af9-1e27f0bf8990)
 
 It's fast because it presents the content in a user-friendly form.
 
