@@ -16,9 +16,18 @@ export function Login({ onSubmit }: {
     setIsLoading(true)
     e.preventDefault()
     e.stopPropagation()
-    await window.api.setToken(token)
-    onSubmit(token)
-    setIsLoading(false)
+    try {
+      const isCorrect = await window.api.setToken(token)
+      if (isCorrect) {
+        onSubmit(token)
+      } else {
+        alert('Неверный токен')
+      }
+      setIsLoading(false)
+    } catch(e) {
+      alert('Неверный токен')
+      setIsLoading(false)
+    }fet
   }
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {

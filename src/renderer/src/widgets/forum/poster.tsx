@@ -33,7 +33,7 @@ export function ForumPoster() {
       ref={ref}
     >
       <div 
-        className='w-full h-auto aspect-[1920/600] fixed top-0 overflow-hidden bg-center bg-cover bg-neutral-800'
+        className='w-full h-auto aspect-[1920/600] fixed z-10 top-0 overflow-hidden bg-center bg-cover bg-neutral-800'
         style={{ 
           height: blockHeight - y,
           minHeight: minHeight
@@ -41,7 +41,7 @@ export function ForumPoster() {
       >
         <img 
           src={poster} 
-          className='w-full h-full absolute pointer-events-none object-cover'
+          className='w-full h-full absolute pointer-events-none object-cover select-none'
           style={{
             filter: `blur(${scroll / maxScroll * 5}px)`,
             transform: `scale(${scroll / maxScroll * 0.01 + 1})`,

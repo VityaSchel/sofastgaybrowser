@@ -39,6 +39,12 @@ export function App() {
     setIsLoggedIn(true)
   }
 
+  React.useEffect(() => {
+    window.api.onLogout(() => {
+      setIsLoggedIn(false)
+    })
+  }, [])
+
   return (
     <AuthContext.Provider value={{ token }}>
       <div className='bg-neutral-900 min-h-screen'>
@@ -55,6 +61,7 @@ export function App() {
             : <Login onSubmit={handleSubmitLogin} />
         )}
       </div>
+      <div id='portal' />
     </AuthContext.Provider>
   )
 }

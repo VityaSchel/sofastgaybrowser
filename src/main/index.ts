@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, Menu } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -6,13 +6,16 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url)) + '/'
 
-import { GetAuthState, GetForum, GetTopic, Login, SetAuthToken, SetBBData } from './ipc-router'
+import { GetAuthState, GetForum, GetTopic, Login, SetAuthToken, SetBBData, OpenFile, SaveFile } from './ipc-router'
+import { store } from './store'
 
+export let mainWindow: BrowserWindow | null = null
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+  const mainBrowserWindow = new BrowserWindow({
+    width: 1020,
+    height: 700,
+    minWidth: 600,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -23,38 +26,84 @@ function createWindow(): void {
       contextIsolation: true
     }
   })
+  mainWindow = mainBrowserWindow
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
+  mainBrowserWindow.on('ready-to-show', () => {
+    mainBrowserWindow.show()
   })
 
-  mainWindow.webContents.setWindowOpenHandler((details) => {
+  mainBrowserWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  mainBrowserWindow.webContents.session.webRequest.onBeforeSendHeaders(
+    (details, callback) => {
+      callback({ requestHeaders: { Origin: '*', ...details.requestHeaders } })
+    },
+  )
+
+  mainBrowserWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        'Access-Control-Allow-Origin': ['*'],
+        ...details.responseHeaders,
+      },
+    })
   })
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    mainBrowserWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainBrowserWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('dev.hloth.sofastgaybrowser')
 
-  // Default open or close DevTools by F12 in development
-  // and ignore CommandOrControl + R in production.
-  // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+
+  const isMac = process.platform === 'darwin'
+  const template = [
+    ...(isMac
+      ? [{
+        label: app.name,
+        submenu: [
+          { role: 'about' },
+          { type: 'separator' },
+          { role: 'services' },
+          { type: 'separator' },
+          { role: 'hide' },
+          { role: 'hideOthers' },
+          { role: 'unhide' },
+          { type: 'separator' },
+          { role: 'quit' }
+        ]
+      }]
+      : []),
+    {
+      label: 'Пользователь',
+      submenu: [
+        {
+          label: 'Выйти',
+          click: () => {
+            mainWindow?.webContents.send('logout')
+            store.delete('token')
+          }
+        }
+      ]
+    },
+    { role: 'editMenu' },
+    { role: 'viewMenu' },
+    { role: 'windowMenu' }
+  ]
+  // @ts-ignore ...
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 
   ipcMain.handle('get_auth_state', () => GetAuthState())
   ipcMain.handle('set_auth_token', (_, token: string) => SetAuthToken(token))
@@ -62,6 +111,8 @@ app.whenReady().then(() => {
   ipcMain.handle('get_forum', (_, forumID: number, page: number) => GetForum(forumID, page))
   ipcMain.handle('get_topic', (_, topicID: number) => GetTopic(topicID))
   ipcMain.handle('set_bb_data', (_, token: string) => SetBBData(token))
+  ipcMain.handle('save_torrent_file', (_, topicId: number) => SaveFile(topicId))
+  ipcMain.handle('open_torrent_file', (_, topicId: number) => OpenFile(topicId))
 
   createWindow()
 
