@@ -8,19 +8,29 @@ import { IconButton } from '@/shared/ui/icon-button'
 import { MdClose, MdFullscreen } from 'react-icons/md'
 import { SaveButton } from '@/features/save-button'
 import { OpenButton } from '@/features/open-button'
+import { Button } from '@/shared/ui/button'
 
-export function ForumTopics({ topics }: {
+export function ForumTopics({ topics, onLoadMore }: {
   topics: TopicMin[] | null
+  onLoadMore: () => void
 }) {
-
   if(topics === null) return null
 
   return (
-    <div className='grid grid-cols-2 p-4 gap-4'>
-      {topics.slice(0, 5).map(topic => (
-        <Topic topic={topic} key={topic.id} />
-      ))}
-    </div>
+    <>
+      <div className='grid grid-cols-2 p-4 gap-4'>
+        {topics.map(topic => (
+          <Topic topic={topic} key={topic.id} />
+        ))}
+      </div>
+      <div className='flex justify-center w-full pt-4 pb-8'>
+        <Button
+          onClick={onLoadMore}
+        >
+          Загрузить еще
+        </Button>
+      </div>
+    </>
   )
 }
 

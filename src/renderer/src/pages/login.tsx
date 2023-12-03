@@ -1,3 +1,4 @@
+import { Button } from '@/shared/ui/button'
 import { TabSwitch } from '@/shared/ui/tab-switch'
 import React from 'react'
 
@@ -27,7 +28,7 @@ export function Login({ onSubmit }: {
     } catch(e) {
       alert('Неверный токен')
       setIsLoading(false)
-    }fet
+    }
   }
 
   const handleAuth = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -113,13 +114,11 @@ export function Login({ onSubmit }: {
                   />
                 </div>
               )}
-              <button
-                type="submit"
-                className='text-white bg-indigo-500 py-2 px-4 rounded-md font-semibold shadow-lg shadow-indigo-500/50 disabled:shadow-none disabled:bg-indigo-500/50 disabled:cursor-not-allowed'
+              <Button
                 disabled={isLoading || !username || !password || (Boolean(captchaURL) && !captcha)}
               >
                 Войти
-              </button>
+              </Button>
             </form>  
           </div>
         </div>

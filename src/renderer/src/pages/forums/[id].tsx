@@ -13,6 +13,7 @@ export function ForumPage() {
   const [forumInfo, setForumInfo] = React.useState<Forum | null>(null)
   const [subforumInfo, setSubforumInfo] = React.useState<ForumMin | null>(null)
   const [topics, setTopics] = React.useState<TopicMin[] | null>(null)
+  const [page, setPage] = React.useState(1)
 
   if (!id || !Number.isSafeInteger(Number(id))) {
     console.error('Invalid forum ID', id)
@@ -38,6 +39,13 @@ export function ForumPage() {
     setTopics(null)
     const subforum = await window.api.getForum(Number(subforumInfo.id))
     setTopics(subforum.topics)
+  }
+
+  const handleLoadMoreTopics = async () => {
+    if (subforumInfo === null || topics === null) return
+    const newTopics = await window.api.getForum(subforumInfo.id, page)
+    setPage(page + 1)
+    setTopics([...topics, ...newTopics])
   }
 
   if (forumInfo === null) {
@@ -70,7 +78,12 @@ export function ForumPage() {
             <span className='text-white font-bold text-lg'>Загрузка тем...</span>
           </div>
         )}
-        <ForumTopics topics={topics} />
+        {subforumInfo !== null && (
+          <ForumTopics 
+            topics={topics} 
+            onLoadMore={handleLoadMoreTopics}
+          />
+        )}
       </main>
     </ForumContext.Provider>
   )
