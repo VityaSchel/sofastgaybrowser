@@ -16,6 +16,8 @@ Made with Electron (and it's my second project with native apps is a porn browse
 - watch videos (only after copyright holder granted you permission)
 - open torrents directly from list
 - preview images instantly or open fullsize version with a single click
+- login with either username+password or bbdata token from cookies
+- captcha support in login form
 
 ## Download
 
