@@ -2,6 +2,8 @@
 
 There was a "so long gay bowser" so I present to you: a "so fast gay browser". 
 
+[]
+
 It's fast because it presents the content in a user-friendly form.
 
 Made with Electron (and it's my second project with native apps is a porn browser out of two of them. check out other one built with Tauri [here](https://github.com/VityaSchel/mypron))
@@ -9,9 +11,11 @@ Made with Electron (and it's my second project with native apps is a porn browse
 ## Features
 
 - browse the best category on pornolab.net
-- download torrents
 - ask copyright holder if it's ok to make a copy of their copyrighted material (download to a computer via internet network using torrent protocol)
+- download torrents
 - watch videos (only after copyright holder granted you permission)
+- open torrents directly from list
+- preview images instantly or open fullsize version with a single click
 
 ## Download
 
