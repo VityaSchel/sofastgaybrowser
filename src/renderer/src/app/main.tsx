@@ -2,7 +2,7 @@ import React from 'react'
 import '@/shared/styles/tailwind.css'
 import '@/shared/styles/globals.scss'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AuthContext } from '@/shared/context/auth'
 
 import { Login } from '@/pages/login'
@@ -51,12 +51,12 @@ export function App() {
         {isLoggedIn !== 'loading' && (
           isLoggedIn
             ? (
-              <BrowserRouter>
+              <HashRouter>
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path='/forums/:id' element={<ForumPage />} />
                 </Routes>
-              </BrowserRouter>
+              </HashRouter>
             )
             : <Login onSubmit={handleSubmitLogin} />
         )}

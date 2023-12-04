@@ -8,6 +8,9 @@ import { ExecException, exec } from 'child_process'
 import path from 'path'
 import { TorrentFile } from 'gayporn/out/model/torrent-file'
 import tmp from 'tmp'
+import log from 'electron-log/main'
+
+log.info('Started ipc-router')
 
 let Pornolab: typeof import('gayporn')
 import('gayporn')
@@ -15,17 +18,17 @@ import('gayporn')
     Pornolab = pornolabImports
     getAPI()
   })
-  .catch(e => console.error(e))
+  .catch(e => log.error(e))
 
 
 let api: PornolabAPI
 function getAPI() {
   api = new Pornolab.PornolabAPI({
-    proxy: {
-      host: '127.0.0.1',
-      port: 9150,
-      type: 5
-    }
+    // proxy: {
+    //   host: '127.0.0.1',
+    //   port: 9150,
+    //   type: 5
+    // }
   })
 }
 

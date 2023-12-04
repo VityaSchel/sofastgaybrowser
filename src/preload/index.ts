@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { Forum } from 'gayporn/out/model/forum'
 import { Topic } from 'gayporn/out/model/topic'
 
 export type API = typeof api
@@ -6,7 +7,7 @@ const api = {
   getAuthState: (): Promise<string | undefined> => ipcRenderer.invoke('get_auth_state'),
   setToken: (token: string): Promise<boolean> => ipcRenderer.invoke('set_auth_token', token),
   login: (username: string, password: string, captcha?: string): Promise<{ ok: true, captcha: false, token: string } | { ok: true, captcha: true, captchaURL: string } | { ok: false, error: string }> => ipcRenderer.invoke('login', username, password, captcha),
-  getForum: (forumID: number, page?: number) => ipcRenderer.invoke('get_forum', forumID, page),
+  getForum: (forumID: number, page?: number): Promise<Forum> => ipcRenderer.invoke('get_forum', forumID, page),
   getTopic: async (topicID: number): Promise<Topic> => {
     if(topicsCache.has(topicID)) {
       return topicsCache.get(topicID)

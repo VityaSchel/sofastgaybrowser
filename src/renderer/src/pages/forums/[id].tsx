@@ -43,9 +43,9 @@ export function ForumPage() {
 
   const handleLoadMoreTopics = async () => {
     if (subforumInfo === null || topics === null) return
-    const newTopics = await window.api.getForum(subforumInfo.id, page)
+    const response = await window.api.getForum(subforumInfo.id, page)
     setPage(page + 1)
-    setTopics([...topics, ...newTopics])
+    setTopics([...topics, ...response.topics])
   }
 
   if (forumInfo === null) {
