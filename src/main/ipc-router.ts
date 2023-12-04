@@ -15,6 +15,7 @@ import('gayporn')
     Pornolab = pornolabImports
     getAPI()
   })
+  .catch(e => console.error(e))
 
 
 let api: PornolabAPI
