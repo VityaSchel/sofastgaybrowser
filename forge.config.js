@@ -2,9 +2,10 @@ module.exports = {
   packagerConfig: {
     ignore: [
       /^\/src/,
-      /^\..+/,
+      /^\/\..+/,
+      /(tsconfig.*)|(electron.vite.config.ts)|(forge.config.cjs)|(tailwind.config.js)|(postcss.config.js)/,
+      'README.md',
       'nodemon.json',
-      
     ],
     icon: './build/icon'
   },
